@@ -60,8 +60,8 @@ def create_sale_details(sale_details_number, sale_number,product_number):
     table.insert_data([id_sale_data,id_product_data,qty_data,discount_data])
     table.export_into_file()
 
-create_clients(CLIENTS_NUMBER)
-# create_inventory(INVENTARY_NUMBER)
+# create_clients(CLIENTS_NUMBER)
+create_inventory(INVENTARY_NUMBER)
 # create_wishlist(WISHLIST_NUMBER)
 # create_sales(SALES_NUMBER)
 # create_sale_details(SALE_DETAILS_NUMBER,SALES_NUMBER,PRODUCTS_NUMBER)
