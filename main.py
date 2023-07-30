@@ -18,6 +18,14 @@ def create_wishlist(wishlist_number):
     table.insert_data([id_client_data,id_product_data])
     table.export_into_file()
 
+def create_warehouses(warehouse_number):
+    table = DemoDatabaseTable('warehouses',['"name"','address','id_city'])
+    name_data = ['Warehouse' + str(i) for i in range(warehouse_number)]
+    address_data = ['Address' + str(i) for i in range(warehouse_number)]
+    id_city_data = [aux_functs.random_num(CITY_NUMBER) for i in range(warehouse_number)]
+    table.insert_data([name_data,address_data,id_city_data])
+    table.export_into_file()
+
 def create_sales(sales_number):
     table = DemoDatabaseTable('sales',['id_client','id_sale_state','"date"'])
     id_client_data = [aux_functs.random_num(CLIENTS_NUMBER) for i in range (sales_number)]
@@ -62,6 +70,7 @@ def create_sale_details(sale_details_number, sale_number,product_number):
 
 # create_clients(CLIENTS_NUMBER)
 create_inventory(INVENTARY_NUMBER)
+create_warehouses(WAREHOUSE_NUMBER)
 # create_wishlist(WISHLIST_NUMBER)
 # create_sales(SALES_NUMBER)
 # create_sale_details(SALE_DETAILS_NUMBER,SALES_NUMBER,PRODUCTS_NUMBER)
