@@ -37,3 +37,9 @@ def create_unique_random_couples(elements_number,max_random_first,max_random_sec
                 first_array.append(first_element)
                 second_array.append(second_element)
     return first_array,second_array
+
+def as_text(text):
+    return '\'' + text + '\''
+
+def as_timestamp(text):
+    return 'TO_TIMESTAMP(\'' + text + '\',\'YYYY-MM-DD\')'

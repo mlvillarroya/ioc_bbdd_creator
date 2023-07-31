@@ -2,10 +2,11 @@ import numpy as np
 from . import aux_functs
 
 class DemoDatabaseTable:
-    def __init__(self,table_name,fields:list[str]) -> None:
+    def __init__(self,table_name,fields:list[str],schema_name = 'public') -> None:
         self.table_name = table_name
         self.fields = fields
         self.data = []
+        self.schema_name = schema_name
 
     def erase_data(self):
         self.data = []
@@ -21,7 +22,7 @@ class DemoDatabaseTable:
         self.data = data_array
 
     def export_into_query(self):
-        query = 'INSERT INTO ' + self.table_name + ' ('
+        query = 'INSERT INTO ' + self.schema_name + '.' + self.table_name + ' ('
         for i,title in enumerate(self.fields):
             query += title
             if i < len(self.fields) - 1: query +=  ', '

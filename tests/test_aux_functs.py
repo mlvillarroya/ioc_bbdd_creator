@@ -19,3 +19,13 @@ def test_create_unique_random_couples_has_element_number():
     a,b = aux_functs.create_unique_random_couples(5,5,5)
     assert len(a) == 5
     assert len(b) == 5
+
+def test_as_text():
+    text = aux_functs.as_text('test_text')
+    assert text[0] == '\''
+    assert text[-1] == '\''
+
+def test_as_timestamp():
+    text = aux_functs.as_timestamp('test_text')
+    assert text.startswith('TO_TIMESTAMP(\'')
+    assert text.endswith('\',\'YYYY-MM-DD\')')

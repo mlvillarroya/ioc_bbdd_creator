@@ -13,21 +13,21 @@ WAREHOUSE_NUMBER = 50
 WISHLIST_NUMBER = 40000
 
 def create_wishlist(wishlist_number):
-    table = DemoDatabaseTable('wishlist',['id_client','id_product'])
+    table = DemoDatabaseTable('wishlist',['id_client','id_product'],'products')
     id_client_data, id_product_data = aux_functs.create_unique_random_couples(wishlist_number,PRODUCTS_NUMBER,CLIENTS_NUMBER)
     table.insert_data([id_client_data,id_product_data])
     table.export_into_file()
 
 def create_warehouses(warehouse_number):
-    table = DemoDatabaseTable('warehouses',['"name"','address','id_city'])
-    name_data = ['Warehouse' + str(i) for i in range(warehouse_number)]
-    address_data = ['Address' + str(i) for i in range(warehouse_number)]
+    table = DemoDatabaseTable('warehouses',['"name"','address','id_city'],'products')
+    name_data = [aux_functs.as_text('Warehouse' + str(i)) for i in range(warehouse_number)]
+    address_data = [aux_functs.as_text('Address' + str(i)) for i in range(warehouse_number)]
     id_city_data = [aux_functs.random_num(CITY_NUMBER) for i in range(warehouse_number)]
     table.insert_data([name_data,address_data,id_city_data])
     table.export_into_file()
 
 def create_sales(sales_number):
-    table = DemoDatabaseTable('sales',['id_client','id_sale_state','"date"'])
+    table = DemoDatabaseTable('sales',['id_client','id_sale_state','"date"'],'sales')
     id_client_data = [aux_functs.random_num(CLIENTS_NUMBER) for i in range (sales_number)]
     id_sale_state_data = [aux_functs.random_num(SALE_STATES_NUMBER) for i in range (sales_number)]
     date_data = [aux_functs.random_date() for i in range (sales_number)]    
@@ -35,7 +35,7 @@ def create_sales(sales_number):
     table.export_into_file()
 
 def create_clients(client_number):
-    table = DemoDatabaseTable('clients',['first_name','last_name','address','email','id_city','phone'])
+    table = DemoDatabaseTable('clients',['first_name','last_name','address','email','id_city','phone'],'clients')
     first_name_data = []
     last_name_data = []
     email_data = []
@@ -51,16 +51,16 @@ def create_clients(client_number):
     table.export_into_file()
 
 def create_inventory(inventory_number):
-    table = DemoDatabaseTable('inventory',['id_product','id_warehouse','qty','date_in'])
+    table = DemoDatabaseTable('inventory',['id_product','id_warehouse','qty','date_in'],'products')
     id_product_data, id_warehouse_data = aux_functs.create_unique_random_couples(inventory_number,PRODUCTS_NUMBER,WAREHOUSE_NUMBER)
     qty_data = [aux_functs.random_num(5) for i in range(inventory_number)]
-    date_in_data = [aux_functs.random_date() for i in range (inventory_number)]    
+    date_in_data = [aux_functs.as_timestamp(aux_functs.random_date()) for i in range (inventory_number)]    
     table.insert_data([id_product_data,id_warehouse_data,qty_data,date_in_data])
     table.export_into_file()
 
 
 def create_sale_details(sale_details_number, sale_number,product_number):
-    table = DemoDatabaseTable('sale_details',['id_sale','id_product','qty','discount'])
+    table = DemoDatabaseTable('sale_details',['id_sale','id_product','qty','discount'],'sales')
     id_sale_data = [aux_functs.random_num(sale_number) for i in range(sale_details_number)]
     id_product_data = [aux_functs.random_num(product_number) for i in range(sale_details_number)]
     qty_data = [aux_functs.random_num(5) for i in range(sale_details_number)]

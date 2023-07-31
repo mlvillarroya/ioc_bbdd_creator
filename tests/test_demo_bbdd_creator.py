@@ -13,6 +13,12 @@ def test_class_initialization_fields_OK():
 def test_class_initialization_data_OK():
     a = DemoDatabaseTable('table_name',['field1','field2','field3'])
     assert a.data == []
+def test_class_initialization_default_schema_OK():
+    a = DemoDatabaseTable('table_name',['field1','field2','field3'])
+    assert a.schema_name == 'public'
+def test_class_initialization_set_schema_OK():
+    a = DemoDatabaseTable('table_name',['field1','field2','field3'],'schema')
+    assert a.schema_name == 'schema'
 def test_insert_with_data_throws_exception():
     a = DemoDatabaseTable('table_name',['field1','field2','field3'])
     a.insert_data([['data1'],['data2'],['data3']])
@@ -42,4 +48,4 @@ def test_erase_data_works():
 def test_export_into_query_works():
     a = DemoDatabaseTable('table_name',['field1','field2','field3'])
     a.insert_data([['data1'],['data2'],['data3']])
-    assert a.export_into_query() == 'INSERT INTO table_name (field1, field2, field3) VALUES\n(data1, data2, data3);'
+    assert a.export_into_query() == 'INSERT INTO public.table_name (field1, field2, field3) VALUES\n(data1, data2, data3);'
