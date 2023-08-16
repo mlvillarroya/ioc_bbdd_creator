@@ -1,7 +1,9 @@
+"""Creates the objects needed to create a database table"""
 import numpy as np
 from . import aux_functs
 
 class DemoDatabaseTable:
+    """Class for database table"""
     def __init__(self,table_name,fields:list[str],schema_name = 'public') -> None:
         self.table_name = table_name
         self.fields = fields
@@ -9,11 +11,14 @@ class DemoDatabaseTable:
         self.schema_name = schema_name
 
     def erase_data(self):
+        """Function to erase all elements in a table"""
         self.data = []
 
     def insert_data(self,data_array):
+        """Function to insert data in a table"""
         # SECURITY CHECKINGS
-        if len(self.data) != 0: raise Exception("Table already contains data. Erase it before inserting")
+        if len(self.data) != 0:
+            raise Exception("Table already contains data. Erase it before inserting")
         sizes = set()
         for data in data_array:
             sizes.add(len(data))
